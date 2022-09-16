@@ -4,28 +4,27 @@ let residentButton = document.querySelector('#button1')
 
 let residentsNames = document.querySelector('.residents')
 
-const residentButtonFunction = (event) => {
+const residentButtonFunction = () => {
 console.log('button clicked')
 axios.get('https://swapi.dev/api/planets/?search=alderaan' ).then((res) => {
     
-    console.log(res.data)
-
-// let residentsA = document.getElementsById
-// console.log(residentsA)
-
-   
+   const {residents} = res.data.results[0]
+    for(let i =0; i < residents.length; i++) {
+        const h2s = document.querySelector('h2');
     
+axios.get(residents[i])
+.then(res => {
 
-    // let residents = res.data
+    // if(h2s.length > 0){
+    //     h2s[i].remove()
+    // }
 
+    let h2 = document.createElement('h2')
+    h2.textContent = res.data.name;
 
-    // for(let i = 0; i < res.data.length; i++){
-    //     let header2 = document.createElement('h2')
-    //     header2.innerHTML = `<h2>${residents[i]} </h2>`
-
-    //     document.body.appendChild(paragraph)
-    //   }
-    //unfinished
+    document.querySelector('body').appendChild(h2)
+})
+    }
 })
 }
 
